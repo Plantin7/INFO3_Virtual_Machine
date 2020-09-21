@@ -141,14 +141,30 @@ public class ASTInterpreter {
                         //throw new UnsupportedOperationException("TODO New");
                     })
                     .when(FieldAccess.class, (fieldAccess, env) -> {
-                        //var value = visit(fieldAccess.receiver(), env);
-                        throw new UnsupportedOperationException("TODO FieldAccess");
+                        var parent = visit(fieldAccess.receiver(), env);
+                        var pConverted = as(parent, JSObject.class, fieldAccess);
+
+                        return pConverted.lookup(fieldAccess.name());
+                        //throw new UnsupportedOperationException("TODO FieldAccess");
                     })
                     .when(FieldAssignment.class, (fieldAssignment, env) -> {
-                        throw new UnsupportedOperationException("TODO FieldAssignment");
+                        var parent = visit(fieldAssignment.receiver(), env);
+                        var pConverted = as(parent, JSObject.class, fieldAssignment);
+                        var value = visit(fieldAssignment.expr(), env);
+                        pConverted.register(fieldAssignment.name(), value);
+                        return UNDEFINED;
+                        //throw new UnsupportedOperationException("TODO FieldAssignment");
                     })
                     .when(MethodCall.class, (methodCall, env) -> {
-                        throw new UnsupportedOperationException("TODO MethodCall");
+                        var parent = visit(methodCall.receiver(), env);
+                        var pConverted = as(parent, JSObject.class, methodCall);
+
+                        var method = pConverted.lookup(methodCall.name());
+                        var mConverted = as(method, JSObject.class, methodCall);
+
+                        var arguments = methodCall.args().stream().map(arg-> visit(arg, env)).toArray();
+                        return mConverted.invoke(pConverted, arguments);
+                       // throw new UnsupportedOperationException("TODO MethodCall");
                     })
             ;
 

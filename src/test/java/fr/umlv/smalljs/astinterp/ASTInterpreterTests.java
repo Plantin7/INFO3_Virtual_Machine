@@ -305,7 +305,7 @@ public class ASTInterpreterTests {
                 print(o);
                 """));
   }
-  /*
+
   @Tag("Q14") @Test
   public void createAnObjectFromAVariableValue() {
     assertEquals("""
@@ -354,7 +354,8 @@ public class ASTInterpreterTests {
                 print(john.foo);
                 """));
   }
-  
+
+
   @Tag("Q16") @Test
   public void objectSetAFieldValue() {
     assertEquals(
@@ -365,6 +366,7 @@ public class ASTInterpreterTests {
                 print(john.name);
                 """));
   }
+
   @Tag("Q16") @Test
   public void objectGetAndSetAField() {
     assertEquals(
@@ -377,7 +379,7 @@ public class ASTInterpreterTests {
                 print(f(obj));
                 """));
   }
-  
+
   @Tag("Q17") @Test
   public void objectCallAMethod() {
     assertEquals(
@@ -392,5 +394,5 @@ public class ASTInterpreterTests {
                 object.foo(42);
                 object.foo(42);
                 """));
-  }*/
+  }
 }
