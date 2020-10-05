@@ -10,3 +10,8 @@ public record Code(int[] instrs, int parameterCount, int slotCount) {
 		requireNonNull(instrs);
 	}
 }
+
+/*
+parameterCount = number of arguments of function
+slotCount =  variable locale + arguments
+ */
